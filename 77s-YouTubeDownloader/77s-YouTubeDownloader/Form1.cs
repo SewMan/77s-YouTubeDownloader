@@ -57,15 +57,21 @@ namespace _77s_YouTubeDownloader
         private Tuple<bool, string> ValidateLink()
         {
             string normalURL;
-            if (DownloadUrlResolver.TryNormalizeYoutubeUrl((txtLink.Text), out normalURL))
+
+            if (!Directory.Exists(txtDownloadFolder.Text))
             {
-                return Tuple.Create(true, normalURL);
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid YouTube link.");
+                MessageBox.Show("Please enter a valid folder.");
                 return Tuple.Create(false, "");
             }
+            else if (DownloadUrlResolver.TryNormalizeYoutubeUrl((txtLink.Text), out normalURL))
+               {
+                  return Tuple.Create(true, normalURL);
+               }
+               else
+               {
+                    MessageBox.Show("Please enter a valid YouTube link.");
+                    return Tuple.Create(false, "");
+               }
         }
     }
 }
