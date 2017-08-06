@@ -43,6 +43,7 @@
             this.lblDecorateProgressBar = new System.Windows.Forms.Label();
             this.pgDownload = new System.Windows.Forms.ProgressBar();
             this.lblDecorateDown = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,6 +86,7 @@
             this.btnDownloadFolder.TabIndex = 3;
             this.btnDownloadFolder.Text = "Choose";
             this.btnDownloadFolder.UseVisualStyleBackColor = false;
+            this.btnDownloadFolder.Click += new System.EventHandler(this.btnDownloadFolder_Click);
             // 
             // chkOpenAfterDownload
             // 
@@ -113,15 +115,18 @@
             // 
             this.txtLink.Location = new System.Drawing.Point(22, 187);
             this.txtLink.Name = "txtLink";
-            this.txtLink.Size = new System.Drawing.Size(208, 20);
+            this.txtLink.Size = new System.Drawing.Size(190, 20);
             this.txtLink.TabIndex = 6;
             // 
             // cboFileType
             // 
             this.cboFileType.FormattingEnabled = true;
-            this.cboFileType.Location = new System.Drawing.Point(236, 187);
+            this.cboFileType.Items.AddRange(new object[] {
+            ".mp3",
+            ".video"});
+            this.cboFileType.Location = new System.Drawing.Point(218, 187);
             this.cboFileType.Name = "cboFileType";
-            this.cboFileType.Size = new System.Drawing.Size(43, 21);
+            this.cboFileType.Size = new System.Drawing.Size(61, 21);
             this.cboFileType.TabIndex = 7;
             // 
             // btnDownload
@@ -235,6 +240,7 @@
         private System.Windows.Forms.Label lblDecorateProgressBar;
         private System.Windows.Forms.ProgressBar pgDownload;
         private System.Windows.Forms.Label lblDecorateDown;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
