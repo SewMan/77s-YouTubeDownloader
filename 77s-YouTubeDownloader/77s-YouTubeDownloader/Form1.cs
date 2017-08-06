@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YoutubeExtractor;
 
 namespace _77s_YouTubeDownloader
 {
@@ -26,6 +28,27 @@ namespace _77s_YouTubeDownloader
             DialogResult result = folderBrowserDialog1.ShowDialog();
             if (result == DialogResult.OK)
                 txtDownloadFolder.Text = folderBrowserDialog1.SelectedPath;
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            //Get the link
+            string link = "https://www.youtube.com/watch?v=c_Vl4T4Anc4"; 
+            
+            //Get the available video formats
+            IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link); 
+            
+            //Select the first .mp4 video in 360p
+            VideoInfo video = videoInfos.First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360); 
+            
+            //If video has a decrypted signature- decipher it
+            if(video.RequiresDecryption)
+                DownloadUrlResolver.DecryptDownloadUrl(video);
+
+            //Create the VideoDownloader
+            //First argument- video to download, second argumet- path
+            var videoDownloader = new VideoDownloader(video, Path.Combine(txtDownloadFolder.Text,video.Title+video.VideoExtension));
+            videoDownloader.Execute();
         }
     }
 }

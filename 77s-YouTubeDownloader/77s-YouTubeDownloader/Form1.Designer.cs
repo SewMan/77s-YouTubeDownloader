@@ -138,6 +138,7 @@
             this.btnDownload.TabIndex = 8;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // lblDecorateCurrentFile
             // 
