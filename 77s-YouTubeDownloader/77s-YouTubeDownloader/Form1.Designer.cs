@@ -42,6 +42,7 @@
             this.lblFileName = new System.Windows.Forms.Label();
             this.lblDecorateProgressBar = new System.Windows.Forms.Label();
             this.pgDownload = new System.Windows.Forms.ProgressBar();
+            this.lblDecorateDown = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,11 +176,25 @@
             this.pgDownload.Size = new System.Drawing.Size(257, 23);
             this.pgDownload.TabIndex = 12;
             // 
+            // lblDecorateDown
+            // 
+            this.lblDecorateDown.AutoSize = true;
+            this.lblDecorateDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblDecorateDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblDecorateDown.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblDecorateDown.Location = new System.Drawing.Point(-6, 335);
+            this.lblDecorateDown.Name = "lblDecorateDown";
+            this.lblDecorateDown.Size = new System.Drawing.Size(393, 9);
+            this.lblDecorateDown.TabIndex = 13;
+            this.lblDecorateDown.Text = "77\'s YouTube Downloader    77\'s YouTube Downloader    77\'s YouTube Downloader    " +
+    "77\'s YouTube Downloader    ";
+            // 
             // frmYTDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 344);
+            this.Controls.Add(this.lblDecorateDown);
             this.Controls.Add(this.pgDownload);
             this.Controls.Add(this.lblDecorateProgressBar);
             this.Controls.Add(this.lblFileName);
@@ -195,6 +210,7 @@
             this.Controls.Add(this.picBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmYTDownloader";
             this.Text = "77\'s YouTube Downloader";
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
@@ -218,6 +234,7 @@
         private System.Windows.Forms.Label lblFileName;
         private System.Windows.Forms.Label lblDecorateProgressBar;
         private System.Windows.Forms.ProgressBar pgDownload;
+        private System.Windows.Forms.Label lblDecorateDown;
     }
 }
 
