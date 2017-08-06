@@ -33,8 +33,11 @@ namespace _77s_YouTubeDownloader
         private void btnDownload_Click(object sender, EventArgs e)
         {
             //Get the link
-            string link = "https://www.youtube.com/watch?v=c_Vl4T4Anc4"; 
-            
+            string link = "https://www.youtube.com/watch?v=c_Vl4T4Anc4";
+
+            Tuple<bool, string> isLinkGood = ValidateLink();
+            MessageBox.Show("Is it a good link?: " + isLinkGood.Item1);
+
             //Get the available video formats
             IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link); 
             
@@ -49,6 +52,20 @@ namespace _77s_YouTubeDownloader
             //First argument- video to download, second argumet- path
             var videoDownloader = new VideoDownloader(video, Path.Combine(txtDownloadFolder.Text,video.Title+video.VideoExtension));
             videoDownloader.Execute();
+        }
+
+        private Tuple<bool, string> ValidateLink()
+        {
+            string normalURL;
+            if (DownloadUrlResolver.TryNormalizeYoutubeUrl((txtLink.Text), out normalURL))
+            {
+                return Tuple.Create(true, normalURL);
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid YouTube link.");
+                return Tuple.Create(false, "");
+            }
         }
     }
 }
