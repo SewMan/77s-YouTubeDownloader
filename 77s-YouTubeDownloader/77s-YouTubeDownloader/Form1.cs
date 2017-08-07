@@ -32,26 +32,62 @@ namespace _77s_YouTubeDownloader
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            //Get the link
-            string link = "https://www.youtube.com/watch?v=c_Vl4T4Anc4";
-
             Tuple<bool, string> isLinkGood = ValidateLink();
-            MessageBox.Show("Is it a good link?: " + isLinkGood.Item1);
+            
+
+            if (isLinkGood.Item1)
+            {
+                RestrictAcessibility();
+                //Pass the validated link into the download method
+                //so it can be assigned to the property int the YouTube video/audio model object
+                EnableAcessibility();
+
+                MessageBox.Show("Is it a good link?: " + isLinkGood.Item1);
+            }
+
+
+            //Get the link
+        //    string link = "https://www.youtube.com/watch?v=c_Vl4T4Anc4";
+
+
 
             //Get the available video formats
-            IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link); 
+           // IEnumerable<VideoInfo> videoInfos = DownloadUrlResolver.GetDownloadUrls(link); 
             
             //Select the first .mp4 video in 360p
-            VideoInfo video = videoInfos.First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360); 
+           // VideoInfo video = videoInfos.First(info => info.VideoType == VideoType.Mp4 && info.Resolution == 360); 
             
             //If video has a decrypted signature- decipher it
-            if(video.RequiresDecryption)
-                DownloadUrlResolver.DecryptDownloadUrl(video);
+          //  if(video.RequiresDecryption)
+           //     DownloadUrlResolver.DecryptDownloadUrl(video);
 
             //Create the VideoDownloader
             //First argument- video to download, second argumet- path
-            var videoDownloader = new VideoDownloader(video, Path.Combine(txtDownloadFolder.Text,video.Title+video.VideoExtension));
-            videoDownloader.Execute();
+          //  var videoDownloader = new VideoDownloader(video, Path.Combine(txtDownloadFolder.Text,video.Title+video.VideoExtension));
+         //   videoDownloader.Execute();
+        }
+
+        private void EnableAcessibility()
+        {
+            lblFileName.Text = "";
+            txtLink.Text = "";
+
+            btnDownload.Enabled = true;
+            btnDownloadFolder.Enabled = true;
+            cboFileType.Enabled = true;
+            txtDownloadFolder.Enabled = true;
+            txtLink.Enabled = true;
+
+            pgDownload.Value = 0; //Clear the progress bar
+        }
+
+        private void RestrictAcessibility()
+        {
+            btnDownload.Enabled = false;
+            btnDownloadFolder.Enabled = false;
+            cboFileType.Enabled = false;
+            txtDownloadFolder.Enabled = false;
+            txtLink.Enabled = false;
         }
 
         private Tuple<bool, string> ValidateLink()
