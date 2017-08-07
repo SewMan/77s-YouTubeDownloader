@@ -38,9 +38,10 @@ namespace _77s_YouTubeDownloader
             if (isLinkGood.Item1)
             {
                 RestrictAcessibility();
+                Download(isLinkGood.Item2);
                 //Pass the validated link into the download method
                 //so it can be assigned to the property int the YouTube video/audio model object
-                EnableAcessibility();
+               // EnableAcessibility();
 
                 MessageBox.Show("Is it a good link?: " + isLinkGood.Item1);
             }
@@ -65,6 +66,43 @@ namespace _77s_YouTubeDownloader
             //First argument- video to download, second argumet- path
           //  var videoDownloader = new VideoDownloader(video, Path.Combine(txtDownloadFolder.Text,video.Title+video.VideoExtension));
          //   videoDownloader.Execute();
+        }
+
+        private void Download(string validatedLink)
+        {
+            if (cboFileType.SelectedIndex == 1)
+            {
+                YouTubeVideoModel videoDownloader = new YouTubeVideoModel();
+                videoDownloader.Link = validatedLink;
+                videoDownloader.FolderPath = txtDownloadFolder.Text;
+                DownloadVideo(videoDownloader);
+            }
+            else
+            {
+                YouTubeAudioModel audioDownloader = new YouTubeAudioModel();
+                audioDownloader.Link = validatedLink;
+                audioDownloader.FolderPath = txtDownloadFolder.Text;
+              //  DownloadAudio(audioDownloader);
+            }
+        }
+
+        private void DownloadVideo(YouTubeVideoModel videoDownloader)
+        {
+            try
+            {
+                //Store VideoInfo object in model
+                videoDownloader.VideoInfo = FileDownloader.GetVideoInfos(videoDownloader);
+                videoDownloader.Video = FileDownloader.GetVideoInfo(videoDownloader);
+                videoDownloader.FilePath = FileDownloader.GetPath(videoDownloader);
+                videoDownloader.FilePath += videoDownloader.Video.VideoExtension;
+                videoDownloader.VideoDownloaderType = FileDownloader.GetVideoDownloader(videoDownloader);
+                FileDownloader.DownloadVideo(videoDownloader);
+            }
+            catch
+            {
+                MessageBox.Show("Download Error!");
+                EnableAcessibility();
+            }
         }
 
         private void EnableAcessibility()
